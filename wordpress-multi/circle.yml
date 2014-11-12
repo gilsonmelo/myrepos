@@ -1,0 +1,10 @@
+machine:
+  python:
+    version: 2.7.8
+dependencies:
+  override:
+  - pip install hot
+  - pip install git+https://github.com/JasonBoyles/envshuffle
+test:
+  override:
+  - envshuffle hot test
