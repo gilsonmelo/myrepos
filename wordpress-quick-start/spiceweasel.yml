@@ -1,0 +1,52 @@
+cookbooks:
+  - build-essential:
+  - openssl:
+  - cron:
+  - cpu:
+  - database:
+  - postgresql:
+  - xfs:
+  - aws:
+  - mysql:
+  - yum:
+  - xml:
+  - chef_handler:
+  - windows:
+  - haproxy:
+  - php:
+  - apache2:
+  - apt:
+  - chef-client:
+  - dmg:
+  - haproxy:
+  - git:
+  - runit:
+  - sudo:
+  - users:
+  - wordpress:
+  - zsh:
+  - quick-start-database:
+  - quick-start-loadbalancer:
+  - quick-start-wordpress:
+
+environments:
+
+roles:
+  - base:
+  - database-server:
+  - application-server:
+  - load-balancer:
+
+data bags:
+
+clusters:
+  - amazon:
+    - ec2 1:
+        run_list:  role[database-server]
+        options: -S nharvey -i ~/.aws/nharvey-fosdem.pem -x ubuntu -G nh-fosdem -I ami-9b3db0f2 -f m1.small
+    - ec2 2:
+        run_list:  role[application-server]
+        options: -S nharvey -i ~/.aws/nharvey-fosdem.pem -x ubuntu -G nh-fosdem -I ami-9b3db0f2 -f m1.small
+    - ec2 1:
+        run_list:  role[load-balancer]
+        options: -S nharvey -i ~/.aws/nharvey-fosdem.pem -x ubuntu -G nh-fosdem -I ami-9b3db0f2 -f m1.small
